@@ -11,5 +11,7 @@ an alternate server.port setting should be supplied in VM params to override the
 
 ######Example Usage (launching 3 different interconnected instances):
 `java -Dserver.port=8001 -jar dms-1.0-SNAPSHOT.jar /opt/configs/instance1_config.json`
+
 `java -Dserver.port=8002 -jar dms-1.0-SNAPSHOT.jar /opt/configs/instance2_config.json`
+
 `java -Dserver.port=8003 -jar dms-1.0-SNAPSHOT.jar /opt/configs/instance3_config.json`
