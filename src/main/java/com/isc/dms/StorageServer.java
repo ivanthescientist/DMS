@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StorageServer {
-    @Autowired
-    private ReplicationManager replicationManager;
 
     @Autowired
     private InstanceRegistry instanceRegistry;
@@ -27,15 +25,11 @@ public class StorageServer {
     @Autowired
     private ReplicationMessageBus replicationMessageBus;
 
-    @Autowired
-    @Qualifier("instanceId")
-    private String instanceId;
-
     public void set(String key, String value) {
         versionRegistry.increment(key, value);
         storageEngine.set(key, value);
-        ReplicationMessage message = new ReplicationMessage(instanceId, key, value, versionRegistry.getVersion(key));
-        replicationMessageBus.broadcast(message);
+        ReplicationMessage message = new ReplicationMessage(instanceRegistry.getInstanceId(), key, value, versionRegistry.getVersion(key));
+        replicationMessageBus.addMessage(message);
     }
 
     public String get(String key) {

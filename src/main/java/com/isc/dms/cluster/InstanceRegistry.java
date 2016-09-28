@@ -5,21 +5,30 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class InstanceRegistry {
-
-    @Autowired
-    @Qualifier("instanceId")
     private String instanceId;
+
     private Map<String, InstanceDescriptor> instances = new HashMap<>();
 
     public void register(String id, String address, Long priority) {
         instances.put(id, new InstanceDescriptor(id, address, priority));
     }
 
-    public Collection<InstanceDescriptor> getInstances() {
+    public void register(InstanceDescriptor instanceDescriptor) {
+        instances.put(instanceDescriptor.getId(), instanceDescriptor);
+    }
+
+    public Collection<InstanceDescriptor> getAllInstances() {
         return instances.values();
+    }
+
+    public Collection<InstanceDescriptor> getClusterInstances() {
+        return getAllInstances().stream()
+                .filter(instanceDescriptor -> !instanceDescriptor.getId().equals(instanceId))
+                .collect(Collectors.toSet());
     }
 
     public Optional<InstanceDescriptor> getById(String id) {
@@ -28,5 +37,13 @@ public class InstanceRegistry {
 
     public InstanceDescriptor getCurrentInstance() {
         return instances.get(instanceId);
+    }
+
+    public void setInstanceId(String instanceId) {
+        this.instanceId = instanceId;
+    }
+
+    public String getInstanceId() {
+        return instanceId;
     }
 }

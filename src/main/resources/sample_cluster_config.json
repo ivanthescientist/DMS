@@ -1,0 +1,20 @@
+{
+	"instanceId": "ID1",
+	"instanceDescriptors": [
+		{
+			"id": "ID1",
+			"address": "localhost:16001",
+			"priority": 3
+		},
+		{
+			"id": "ID2",
+			"address": "localhost:16002",
+			"priority": 2
+		},
+		{
+			"id": "ID3",
+			"address": "localhost:16003",
+			"priority": 1
+		}
+	]
+}

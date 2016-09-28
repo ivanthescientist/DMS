@@ -6,6 +6,8 @@ public class InstanceDescriptor {
     private String address;
     private Long priority;
 
+    public InstanceDescriptor() {}
+
     public InstanceDescriptor(String id, String address, Long priority) {
         this.id = id;
         this.address = address;
