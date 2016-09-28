@@ -15,3 +15,9 @@ an alternate server.port setting should be supplied in VM params to override the
 `java -Dserver.port=8002 -jar dms-1.0-SNAPSHOT.jar /opt/configs/instance2_config.json`
 
 `java -Dserver.port=8003 -jar dms-1.0-SNAPSHOT.jar /opt/configs/instance3_config.json`
+
+Data itself can be accessed through simplistic REST-like API: 
+
+`GET {hostname:port}/value/{key}` - to get value by key
+
+`PUT {hostname:port}/value/{key}` - to set value by key (request body should contain value)
